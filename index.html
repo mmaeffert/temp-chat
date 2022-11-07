@@ -7,6 +7,7 @@
     <script src="js/uikit.min.js"></script>
     <script src="js/uikit-icons.min.js"></script>
 </head>
+
 <div class="container">
     <div class="uk-card uk-card-default uk-card-hover uk-card-body">
         <h1>Mäffert's secret chatroom</h1>
@@ -40,17 +41,20 @@
 <script>
     chatmessage_ttl = 3000;
 
+    // This represents the actual chat data
     var chatList = [
         {message:"Moin ich bin Tobi", username:"Tobias", mode:"received", created:1767825686648},
         {message:"Tag Tobi wie gehts?", username:"Max", mode:"sent", created:1767825686648},
         {message:"Supi und dir?", username:"Tobias", mode:"received", created:1767825686648},
     ];
 
+    // Adds message to the chatList variable
     function addChatMessage(_message, _username, _mode){
         chatList.push({message:_message, username:_username, mode:_mode, created:new Date().getTime()})
         renderChatWindow();
     }
 
+    // Renders all the chat messages in the chatList variable
     function renderChatWindow(){
         chatWindowEntries = Object.entries(chatList);
         const chatWindow = document.getElementById("chatwindow");
@@ -68,14 +72,18 @@
         chatwindow.scrollTop = chatwindow.scrollHeight;
     }
 
+    // updates and renderx every x seconds
     async function keepRenderingChatWindow(){
         while(true){
             console.log("New render");
             renderChatWindow();
+
+            // Set sleep timer here
             await new Promise(r => setTimeout(r, 20));
         }
     }
 
+    // Adds an event listener to the input field. Whenever Enter is pressed, add this message
     var message_input = document.getElementById("message_window");
     message_input.addEventListener("keypress", function(event){
         const username = document.getElementById("username").value;
@@ -89,6 +97,7 @@
 
     selected_chatroom = 0;
    
+    // Changes background color of the selected chatroom 
     function select_chatroom(chatroom_number){
         for(i = 0; i < 3; i++){
             if(i == chatroom_number){
