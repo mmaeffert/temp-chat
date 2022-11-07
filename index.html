@@ -1,0 +1,105 @@
+<head>
+    <title>Title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/uikit.min.css" />
+    <link rel="stylesheet" href="css/own.css" />
+    <script src="js/uikit.min.js"></script>
+    <script src="js/uikit-icons.min.js"></script>
+</head>
+<div class="container">
+    <div class="uk-card uk-card-default uk-card-hover uk-card-body">
+        <h1>Mäffert's secret chatroom</h1>
+        <h3>Alle Nachrichten löschen sich nach 30 Sekunden</h3>
+        <div style="display: flex;">
+            <legend class="uk-legend">Username (optional)</legend>
+            <input id="username" class="uk-input" type="text" placeholder="Dieter" aria-label="Input">
+        </div>
+        <div class="uk-column-1-2" style="margin-top: 10px; column-gap: 0px !important;">
+        <p style="vertical-align:middle;">Verfügbare Chatrooms:</p>
+        <button class="uk-button uk-button-default">Beitreten</button>
+        </div>
+        <ul class="uk-list uk-list-collapse uk-list-divider">
+            <li id="chatroom-0" onclick="select_chatroom(0)">Room 1</li>
+            <li id="chatroom-1" onclick="select_chatroom(1)">Room 2</li>
+            <li id="chatroom-2" onclick="select_chatroom(2)">Room 3</li>
+        </ul>
+        <div id="chatwindow" class="chatwindow uk-panel uk-panel-scrollable">
+        </div>
+        <div class="message-window">
+            <input id="message_window" class="uk-input" type="text" placeholder="Nachricht..." aria-label="Input">
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<script>
+    chatmessage_ttl = 3000;
+
+    var chatList = [
+        {message:"Moin ich bin Tobi", username:"Tobias", mode:"received", created:1767825686648},
+        {message:"Tag Tobi wie gehts?", username:"Max", mode:"sent", created:1767825686648},
+        {message:"Supi und dir?", username:"Tobias", mode:"received", created:1767825686648},
+    ];
+
+    function addChatMessage(_message, _username, _mode){
+        chatList.push({message:_message, username:_username, mode:_mode, created:new Date().getTime()})
+        renderChatWindow();
+    }
+
+    function renderChatWindow(){
+        chatWindowEntries = Object.entries(chatList);
+        const chatWindow = document.getElementById("chatwindow");
+        chatWindow.innerHTML = "";
+        for(let message of chatWindowEntries){
+            if(message[1].created - new Date().getTime() > - chatmessage_ttl){
+                let newMessage = message[1].mode == "received" ? "<div class=\"receivedmessagecontainer\">" :  "<div class=\"sentmessagecontainer\">";
+                newMessage += "<div class=\"message-head\"><p class=\"username_in_chat_message\">" + message[1].username + "   </p>";
+                newMessage += "<progress  id=\"js-progressbar\" class=\"uk-progress progressBar\" value=\"" +  (new Date().getTime() - message[1].created) / chatmessage_ttl + "\" max=\"1\"></progress></div>";
+                newMessage += "<p class=\"chatmessage\">" + message[1].message + "</p></div>";
+                newMessage += message[1].mode == "sent" ? "<br><br><br>" : "";
+                chatWindow.innerHTML += newMessage;
+            }
+        }
+        chatwindow.scrollTop = chatwindow.scrollHeight;
+    }
+
+    async function keepRenderingChatWindow(){
+        while(true){
+            console.log("New render");
+            renderChatWindow();
+            await new Promise(r => setTimeout(r, 20));
+        }
+    }
+
+    var message_input = document.getElementById("message_window");
+    message_input.addEventListener("keypress", function(event){
+        const username = document.getElementById("username").value;
+        var message_window = document.getElementById("message_window")
+        if (event.key == "Enter" && message_window.value != ""){
+            console.log(username);
+            addChatMessage(message_input.value, (username == null || username == "") ? "anonymous" : username, "sent");
+            message_window.value = null;
+        }
+    });
+
+    selected_chatroom = 0;
+   
+    function select_chatroom(chatroom_number){
+        for(i = 0; i < 3; i++){
+            if(i == chatroom_number){
+                selected_chatroom = chatroom_number;
+                document.getElementById("chatroom-" + String(chatroom_number)).style = "background-color:rgb(248,248,248);";
+            } else{
+                document.getElementById("chatroom-" + String(i)).style = "background-color:none;";
+            }
+        }
+    }
+
+    renderChatWindow();
+    keepRenderingChatWindow();
+</script>
