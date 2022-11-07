@@ -1,5 +1,5 @@
 # Your first and best temporary chat service
-### sponsored by [Kama Webservice](www.kama-webservice.de)
+### sponsored by [Kama Webservice](https://www.kama-webservice.de)
 
 Things to do:
 - Aktuell ist es so, dass nach der Nachricht die der User gesendet hat, drei <br> kommen. Das kann man besser machen
