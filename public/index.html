@@ -100,6 +100,18 @@
         renderChatWindow();
     }
 
+    function renderMessageContent(_message){
+        const isURL = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/;
+        const isIMG = /.(jpg|jpeg|png|webp|avif|gif|svg)/;
+        console.log(/.(jpg|jpeg|png|webp|avif|gif|svg)/.test(_message));
+
+        if(isURL.test(_message) && isIMG.test(_message)){
+            return "<img src=\"" + _message + "\">";
+        }else{
+            return _message
+        }
+    }
+
     // Renders all the chat messages in the chatList variable
     function renderChatWindow(){
         let chatWindowEntries = Object.entries(chatList);
@@ -110,7 +122,7 @@
                 let newMessage = message[1].mode == "received" ? "<div class=\"receivedmessagecontainer\">" :  "<div class=\"sentmessagecontainer\">";
                 newMessage += "<div class=\"message-head\"><p class=\"username_in_chat_message\">" + message[1].username + "   </p>";
                 newMessage += "<progress  id=\"js-progressbar\" class=\"uk-progress progressBar\" value=\"" +  (new Date().getTime() - message[1].created) / chatmessage_ttl + "\" max=\"1\"></progress></div>";
-                newMessage += "<p class=\"chatmessage\">" + message[1].message + "</p></div>";
+                newMessage += "<p class=\"chatmessage\">" + renderMessageContent(message[1].message) + "</p></div>";
                 newMessage += message[1].mode == "sent" ? "<br><br><br>" : "";
                 chatWindow.innerHTML += newMessage;
             }
