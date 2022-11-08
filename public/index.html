@@ -55,6 +55,7 @@
     appId: "1:939087262880:web:74003625280bd22bb605c5",
   };
 
+  let newMessage = false;
   const session_key = Math.random();
 
   // Initialize Firebase
@@ -94,6 +95,7 @@
     // Adds message to the chatList variable
     function addChatMessage(_message, _username, _mode, _created = -1){
         chatList.push({message:_message, username:_username, mode:_mode, created:( _created == -1 ? new Date().getTime() : _created)});
+        newMessage = true;
         renderChatWindow();
     }
 
@@ -138,7 +140,10 @@
                 chatWindow.innerHTML += newMessage;
             }
         }
-        chatwindow.scrollTop = chatwindow.scrollHeight;
+        if(newMessage){
+            newMessage = false;
+            chatwindow.scrollTop = chatwindow.scrollHeight;
+        }
     }
 
     // updates and renderx every x seconds
