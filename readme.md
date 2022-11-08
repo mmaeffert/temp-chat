@@ -6,6 +6,7 @@ Things to do:
 - Die Farbe des Ladebalkens kann angepasst werden
 - Der Ladebalken sollte immer außen stehen und nicht direkt neben dem Autornamen
 - Antwort button neben den nachrichten, wie bei whatsapp
+- Wenn ein Bild Geschickt wird, sind die Chatnachrichten verschoben
 
 Notes:
 - Ich verwende [UIkit](https://getuikit.com/docs/introduction) als CSS library. Dort kann man sich einfach die notwendigen Komponenten anschauen und easy implementieren
