@@ -5,6 +5,7 @@ Things to do:
 - Aktuell ist es so, dass nach der Nachricht die der User gesendet hat, drei <br> kommen. Das kann man besser machen
 - Die Farbe des Ladebalkens kann angepasst werden
 - Der Ladebalken sollte immer außen stehen und nicht direkt neben dem Autornamen
+- Antwort button neben den nachrichten, wie bei whatsapp
 
 Notes:
 - Ich verwende [UIkit](https://getuikit.com/docs/introduction) als CSS library. Dort kann man sich einfach die notwendigen Komponenten anschauen und easy implementieren
