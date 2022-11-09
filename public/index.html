@@ -11,18 +11,20 @@
 
 <div class="container">
     <div class="uk-card uk-card-default uk-card-hover uk-card-body">
-        <h1>Mäffert's secret chatroom</h1>
-        <h3>Alle Nachrichten löschen sich nach 60 Sekunden</h3>
-        <div style="display: flex;">
-            <legend class="uk-legend">Username (optional)</legend>
-            <input id="username" class="uk-input" type="text" placeholder="Dieter" aria-label="Input">
-        </div>
-        <div class="uk-column-1-2" style="margin-top: 10px; column-gap: 0px !important;">
-        <p style="vertical-align:middle;">Verfügbare Chatrooms:</p>
-        <button class="uk-button uk-button-default">Beitreten</button>
+        <h1 class="uk-heading-divider">Mäffert's secret chatroom</h1>
+        <p class="uk-alert">--- Alle Nachrichten löschen sich nach 60 Sekunden ---</p>
+        <div class="uk-card uk-card-default uk-card-body">
+            <div style="display: flex;">
+                <legend class="uk-legend">Username <i>(optional)</i>:</legend>
+                <input id="username" class="uk-form" type="text" placeholder="Dieter" aria-label="Input">
+            </div>
+            <div class="uk-column-1-2" style="margin-top: 10px; column-gap: 0px !important;">
+                <p style="vertical-align:middle;">Verfügbare Chatrooms:</p>
+                <button class="uk-button uk-button-default">Beitreten</button>
+            </div>
         </div>
         <ul class="uk-list uk-list-collapse uk-list-divider">
-            <li id="chatroom-0" onclick="select_chatroom(0)">Room 1</li>
+            </span><li class="uk-badge" id="chatroom-0" onclick="select_chatroom(0)">Room 1</li>
         </ul>
         <div id="chatwindow" class="chatwindow uk-panel uk-panel-scrollable">
         </div>

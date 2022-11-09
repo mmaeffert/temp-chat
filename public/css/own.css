@@ -61,3 +61,19 @@
     align-items: center;
     text-align: justify;
 }
+.seconds{
+    text-align: center;
+}
+body{
+    color: blue;
+}
+h1{
+    text-align: center;
+}
+.uk-alert{
+    text-align: center;
+}
+.uk-card{
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+}
