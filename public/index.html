@@ -135,7 +135,7 @@
                 let newMessage = message[1].mode == "received" ? "<div class=\"receivedmessagecontainer\">" :  "<div class=\"sentmessagecontainer\">";
                 newMessage += "<div class=\"message-head\"><p class=\"username_in_chat_message\">" + message[1].username + "   </p>";
                 newMessage += "<progress  id=\"js-progressbar\" class=\"uk-progress progressBar\" value=\"" +  (new Date().getTime() - message[1].created) / chatmessage_ttl + "\" max=\"1\"></progress></div>";
-                newMessage += "<p class=\"chatmessage\">" + renderMessageContent(message[1]) + "</p></div>";
+                newMessage += "<p class=\"chatmessage\">"  + renderMessageContent(message[1]) + "</p></div>";
                 newMessage += message[1].mode == "sent" ? "<br><br><br>" : "";
                 chatWindow.innerHTML += newMessage;
             }

@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "dompurify": "^2.4.0",
     "firebase": "^9.13.0"
   },
   "name": "tempchat",
